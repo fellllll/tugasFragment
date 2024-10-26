@@ -46,30 +46,38 @@
         android:gravity="center"
         android:layout_marginTop="64dp"
         android:orientation="horizontal">
-        <ImageButton
+        <Button
             android:id="@+id/btn1"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_margin="8dp"
-            android:src="@drawable/PINK"/>
-        <ImageButton
+            android:textSize="32dp"
+            android:textStyle="bold"
+            android:backgroundTint="#ffc0cb"/>
+        <Button
             android:id="@+id/btn2"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_margin="8dp"
-            android:src="@drawable/PINK"/>
-        <ImageButton
+            android:textSize="32dp"
+            android:textStyle="bold"
+            android:backgroundTint="#ffc0cb"/>
+        <Button
             android:id="@+id/btn3"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_margin="8dp"
-            android:src="@drawable/PINK"/>
-        <ImageButton
+            android:textSize="32dp"
+            android:textStyle="bold"
+            android:backgroundTint="#ffc0cb"/>
+        <Button
             android:id="@+id/btn4"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_margin="8dp"
-            android:src="@drawable/PINK"/>
+            android:textSize="32dp"
+            android:textStyle="bold"
+            android:backgroundTint="#ffc0cb"/>
     </LinearLayout>
 
     <LinearLayout
@@ -77,30 +85,38 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal">
-        <ImageButton
+        <Button
             android:id="@+id/btn5"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_margin="8dp"
-            android:src="@drawable/PINK"/>
-        <ImageButton
+            android:textSize="32dp"
+            android:textStyle="bold"
+            android:backgroundTint="#ffc0cb"/>
+        <Button
             android:id="@+id/btn6"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_margin="8dp"
-            android:src="@drawable/PINK"/>
-        <ImageButton
+            android:textSize="32dp"
+            android:textStyle="bold"
+            android:backgroundTint="#ffc0cb"/>
+        <Button
             android:id="@+id/btn7"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_margin="8dp"
-            android:src="@drawable/PINK"/>
-        <ImageButton
+            android:textSize="32dp"
+            android:textStyle="bold"
+            android:backgroundTint="#ffc0cb"/>
+        <Button
             android:id="@+id/btn8"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_margin="8dp"
-            android:src="@drawable/PINK"/>
+            android:textSize="32dp"
+            android:textStyle="bold"
+            android:backgroundTint="#ffc0cb"/>
 
     </LinearLayout>
 
@@ -110,18 +126,22 @@
         android:gravity="center"
         android:layout_marginBottom="32dp"
         android:orientation="horizontal">
-        <ImageButton
+        <Button
             android:id="@+id/btn9"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_margin="8dp"
-            android:src="@drawable/PINK"/>
-        <ImageButton
+            android:textSize="32dp"
+            android:textStyle="bold"
+            android:backgroundTint="#ffc0cb"/>
+        <Button
             android:id="@+id/btn10"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_margin="8dp"
-            android:src="@drawable/PINK"/>
+            android:textSize="32dp"
+            android:textStyle="bold"
+            android:backgroundTint="#ffc0cb"/>
     </LinearLayout>
 
     <Button
@@ -133,5 +153,14 @@
         android:textStyle="bold"
         android:textSize="16dp"
         android:text="Give Up"/>
+
+    <TextView
+        android:id="@+id/tvRubahAngka"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#c2656d"
+        android:layout_gravity="center"
+        android:text="hahalo semua"
+        android:textSize="20dp"/>
 
 </LinearLayout>

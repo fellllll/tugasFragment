@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,6 +37,47 @@ class halamanTiga : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_halaman_tiga, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+//        PINDAH KE FRAG 1 N KIRIM DATA
+        val _edtBatasAngka = view.findViewById<EditText>(R.id.edtBatasAngka)
+        val _btnFrag1 = view.findViewById<Button>(R.id.btnFrag1)
+        _btnFrag1.setOnClickListener {
+
+            val angka = _edtBatasAngka.text.toString()
+            val mBundle = Bundle()
+            mBundle.putString("DATAANGKA", angka)
+
+            val mhalamanSatu = halamanSatu()
+            mhalamanSatu.arguments = mBundle
+
+            val mFragmentManager = parentFragmentManager
+            mFragmentManager.beginTransaction().apply {
+                replace(R.id.frameContainer, mhalamanSatu, halamanSatu::class.java.simpleName)
+                addToBackStack(null)
+                commit()
+            }
+        }
+
+//        PINDAH KE FRAG 2 N KIRIM SCORE
+        val _btnFrag2 = view.findViewById<Button>(R.id.btnFrag2)
+        _btnFrag2.setOnClickListener {
+            val mBundle = Bundle()
+            mBundle.putString("DATASCORE", arguments?.getString("DATASCORE"))
+
+            val mhalamanDua = halamanDua()
+            mhalamanDua.arguments = mBundle
+
+            val mFragmentManager = parentFragmentManager
+            mFragmentManager.beginTransaction().apply {
+                replace(R.id.frameContainer, mhalamanDua, halamanDua::class.java.simpleName)
+                addToBackStack(null)
+                commit()
+            }
+        }
     }
 
     companion object {

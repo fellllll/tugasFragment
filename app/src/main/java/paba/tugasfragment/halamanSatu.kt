@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,6 +29,36 @@ class halamanSatu : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val score = 19;
+
+//        SET ANGKA
+        val _tvRubahAngka = view.findViewById<TextView>(R.id.tvRubahAngka)
+        if (arguments != null){
+            val angka = arguments?.getString("DATAANGKA")
+            _tvRubahAngka.text = angka.toString()
+        }
+
+        val _btnGiveUp = view.findViewById<Button>(R.id.btnGiveUp)
+        _btnGiveUp.setOnClickListener {
+            val mBundle = Bundle()
+            mBundle.putString("DATASCORE", score.toString())
+
+            val mhalamanDua = halamanDua()
+            mhalamanDua.arguments = mBundle
+
+            val mFragmentManager = parentFragmentManager
+            mFragmentManager.beginTransaction().apply {
+                replace(R.id.frameContainer, mhalamanDua, halamanDua::class.java.simpleName)
+                addToBackStack(null)
+                commit()
+            }
+        }
+
+
     }
 
     override fun onCreateView(

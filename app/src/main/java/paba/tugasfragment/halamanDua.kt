@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,6 +29,47 @@ class halamanDua : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+//        SET SCORE
+        val _tvScore = view.findViewById<TextView>(R.id.tvScore)
+        if (arguments != null){
+            val score = arguments?.getString("DATASCORE")
+            _tvScore.text = score
+        }
+
+//        PINDAH FRAGMENT N KIRIM SCORE
+        val _btnFrag3 = view.findViewById<Button>(R.id.btnFrag3)
+        _btnFrag3.setOnClickListener {
+            val mBundle = Bundle()
+            mBundle.putString("DATASCORE", arguments?.getString("DATASCORE"))
+
+            val mhalamanTiga = halamanTiga()
+            mhalamanTiga.arguments = mBundle
+
+            val mFragmentManager = parentFragmentManager
+            mFragmentManager.beginTransaction().apply {
+                replace(R.id.frameContainer, mhalamanTiga, halamanTiga::class.java.simpleName)
+                addToBackStack(null)
+                commit()
+            }
+        }
+
+//        PINDAH KE FRAGMENT 1
+        val _btnFrag1 = view.findViewById<Button>(R.id.btnFrag1)
+        _btnFrag1.setOnClickListener {
+            val mhalamanSatu = halamanSatu()
+            val mFragmentManager = parentFragmentManager
+            mFragmentManager.beginTransaction().apply {
+                replace(R.id.frameContainer, mhalamanSatu, halamanSatu::class.java.simpleName)
+                addToBackStack(null)
+                commit()
+            }
+        }
+
     }
 
     override fun onCreateView(
