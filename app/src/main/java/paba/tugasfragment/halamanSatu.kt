@@ -1,6 +1,8 @@
 package paba.tugasfragment
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -33,15 +35,15 @@ class halamanSatu : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val score = 19;
 
-//        SET ANGKA
-        val _tvRubahAngka = view.findViewById<TextView>(R.id.tvRubahAngka)
-        if (arguments != null){
-            val angka = arguments?.getString("DATAANGKA")
-            _tvRubahAngka.text = angka.toString()
-        }
+        var score = 50;
+        var angkaAwal = 1
+        var angkaAkhir = 5
 
+        val _tvScore = view.findViewById<TextView>(R.id.tvScore)
+        _tvScore.text = score.toString()
+
+//        GIVE UP
         val _btnGiveUp = view.findViewById<Button>(R.id.btnGiveUp)
         _btnGiveUp.setOnClickListener {
             val mBundle = Bundle()
@@ -55,6 +57,95 @@ class halamanSatu : Fragment() {
                 replace(R.id.frameContainer, mhalamanDua, halamanDua::class.java.simpleName)
                 addToBackStack(null)
                 commit()
+            }
+        }
+
+        val buttons = arrayOf(
+            view.findViewById<Button>(R.id.btn1),
+            view.findViewById<Button>(R.id.btn2),
+            view.findViewById<Button>(R.id.btn3),
+            view.findViewById<Button>(R.id.btn4),
+            view.findViewById<Button>(R.id.btn5),
+            view.findViewById<Button>(R.id.btn6),
+            view.findViewById<Button>(R.id.btn7),
+            view.findViewById<Button>(R.id.btn8),
+            view.findViewById<Button>(R.id.btn9),
+            view.findViewById<Button>(R.id.btn10)
+
+        )
+        if (arguments != null) {
+            val txtHasil = arguments?.getString("DATAANGKA")
+            angkaAwal = txtHasil.toString().toInt()
+            angkaAkhir = angkaAwal + txtHasil.toString().toInt()
+        }
+
+        val pairedNumbers = mutableListOf<Int>()
+        for (i in angkaAwal..angkaAkhir) {
+            pairedNumbers.add(i)
+            pairedNumbers.add(i)
+        }
+
+        pairedNumbers.shuffle()
+
+        for (button in buttons) {
+            button.text = ""
+        }
+
+        // Inside the `onViewCreated` function
+        var lastClickedIndex: Int? = null
+
+        buttons.forEachIndexed { index, button ->
+            button.setOnClickListener {
+                val currentValue = pairedNumbers[index]
+
+                // Show the number on the clicked button
+                button.text = currentValue.toString()
+
+                if (lastClickedIndex == null) {
+                    // First button click, store index reference
+                    lastClickedIndex = index
+                } else {
+                    // Second button click, compare with the first button's value
+                    val firstButton = buttons[lastClickedIndex!!]
+
+                    if (pairedNumbers[lastClickedIndex!!] == currentValue) {
+                        // Numbers match, increase score and disable both buttons
+                        score += 10
+                        button.isEnabled = false
+                        firstButton.isEnabled = false
+                    } else {
+                        // Numbers do not match, decrease score
+                        score -= 5
+
+                        // Show both numbers briefly, then hide them with a delay
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            button.text = ""
+                            firstButton.text = ""
+                        }, 1000) // Delay of 1 second (1000 ms)
+                    }
+
+                    // Update score display
+                    _tvScore.text = score.toString()
+
+                    // Reset for the next pair attempt
+                    lastClickedIndex = null
+                }
+
+                // Check if all buttons are disabled (all pairs matched)
+                if (buttons.all { !it.isEnabled }) {
+                    val mBundle = Bundle()
+                    mBundle.putString("DATASCORE", score.toString())
+
+                    val mhalamanDua = halamanDua()
+                    mhalamanDua.arguments = mBundle
+
+                    val mFragmentManager = parentFragmentManager
+                    mFragmentManager.beginTransaction().apply {
+                        replace(R.id.frameContainer, mhalamanDua, halamanDua::class.java.simpleName)
+                        addToBackStack(null)
+                        commit()
+                    }
+                }
             }
         }
 

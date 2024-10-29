@@ -38,7 +38,7 @@ class halamanDua : Fragment() {
         val _tvScore = view.findViewById<TextView>(R.id.tvScore)
         if (arguments != null){
             val score = arguments?.getString("DATASCORE")
-            _tvScore.text = score
+            _tvScore.text = score.toString()
         }
 
 //        PINDAH FRAGMENT N KIRIM SCORE
