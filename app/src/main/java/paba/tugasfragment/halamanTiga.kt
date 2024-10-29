@@ -62,6 +62,8 @@ class halamanTiga : Fragment() {
             }
         }
 
+
+
 //        PINDAH KE FRAG 2 N KIRIM SCORE
         val _btnFrag2 = view.findViewById<Button>(R.id.btnFrag2)
         _btnFrag2.setOnClickListener {
